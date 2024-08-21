@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Employee Details{% endblock %}
+
+{% block content %}
+<h1>Employee Details</h1>
+<p><strong>Name:</strong> {{ employee.name }}</p>
+<p><strong>Position:</strong> {{ employee.position }}</p>
+<p><strong>Salary:</strong> {{ employee.salary }}</p>
+
+<div class='link-group' style="display:flex; gap: 5vw;">
+<a class='edit-link' href="{{ url_for('main.edit_employee', id=employee._id) }}">Edit</a>
+<a class='edit-link' href="{{ url_for('main.index') }}">Back to Employee List</a>
+</div>
+{% endblock %}
