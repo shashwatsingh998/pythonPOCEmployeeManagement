@@ -49,3 +49,4 @@ def delete_employee(id):
         return redirect(url_for('auth.login'))
     mongo.db.employees.delete_one({'_id': ObjectId(id)})
     return redirect(url_for('main.index'))
+
