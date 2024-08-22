@@ -3,6 +3,7 @@ import os
 import sys
 from flask_testing import TestCase
 from dotenv import load_dotenv
+from flask_pymongo import PyMongo
 from inventory import create_app
 from inventory.db import mongo
 from werkzeug.security import generate_password_hash
@@ -15,14 +16,14 @@ class AuthTestCase(TestCase):
         app = create_app()
         app.config['TESTING'] = True
         app.config['MONGO_URI'] = os.getenv('TEST_MONGO_URI')
-
+        self.mongo=PyMongo(app)
         return app
 
     def setUp(self):
-        mongo.db.users.delete_many({})
+        self.mongo.db.users.delete_many({})
 
     def tearDown(self):
-        mongo.db.users.delete_many({})
+        self.mongo.db.users.delete_many({})
 
     def test_register(self):
         response = self.client.post('/register', data=dict(
@@ -32,7 +33,7 @@ class AuthTestCase(TestCase):
         self.assertRedirects(response,'/login')
 
     def test_login(self):
-        mongo.db.users.insert_one({
+        self.mongo.db.users.insert_one({
             'username': 'testuser',
             'password': generate_password_hash('testpassword')
         })
@@ -50,7 +51,7 @@ class AuthTestCase(TestCase):
         self.assertIn(b'<p>Invalid username or password please try again later</p>', response.data)
 
     def test_logout(self):
-        mongo.db.users.insert_one({
+        self.mongo.db.users.insert_one({
             'username': 'testuser',
             'password': generate_password_hash('testpassword')
         })
