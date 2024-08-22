@@ -19,11 +19,9 @@ class AuthTestCase(TestCase):
         return app
 
     def setUp(self):
-        # Set up test database
         mongo.db.users.delete_many({})
 
     def tearDown(self):
-        # Clean up test database
         mongo.db.users.delete_many({})
 
     def test_register(self):
@@ -34,7 +32,6 @@ class AuthTestCase(TestCase):
         self.assertRedirects(response,'/login')
 
     def test_login(self):
-        # First, register a user
         mongo.db.users.insert_one({
             'username': 'testuser',
             'password': generate_password_hash('testpassword')
@@ -53,7 +50,6 @@ class AuthTestCase(TestCase):
         self.assertIn(b'<p>Invalid username or password please try again later</p>', response.data)
 
     def test_logout(self):
-        # First, register and log in a user
         mongo.db.users.insert_one({
             'username': 'testuser',
             'password': generate_password_hash('testpassword')
