@@ -14,8 +14,8 @@
             </div>
 <div class="employee-actions" style="display:flex; align-items:center">
                 <a style="margin-top:11px;" href="{{ url_for('main.edit_employee', id=employee._id) }}" class="edit-link">Edit</a>
-                <form action="{{ url_for('main.delete_employee', id=employee._id) }}" method="POST" style="display:inline;">
-                    <button type="submit" class="delete-button">Delete</button>
+                <form style="all:unset;" action="{{ url_for('main.delete_employee', id=employee._id) }}" method="POST" style="display:inline;">
+                    <button type="submit" style="margin-bottom:3px;" class="delete-button">Delete</button>
                 </form>
             </div>
         </li>

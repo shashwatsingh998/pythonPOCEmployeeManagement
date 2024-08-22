@@ -2,9 +2,8 @@ from flask import Blueprint, render_template, request, redirect, url_for, sessio
 from functools import wraps
 from inventory.db import mongo
 from werkzeug.security import generate_password_hash, check_password_hash
-#no sufix currently
-auth = Blueprint('auth', __name__)
 
+auth = Blueprint('auth', __name__,url_prefix='/auth')
 @auth.before_app_request
 def beforeLogin():
     userid=session.get('user_id');
@@ -43,7 +42,6 @@ def register():
         username = request.form['username']
         password = request.form['password']
         hashed_password = generate_password_hash(password)
-
         mongo.db.users.insert_one({'username': username, 'password': hashed_password})
         flash('Registration successful! Please log in.', 'success')
         return redirect(url_for('auth.login'))
