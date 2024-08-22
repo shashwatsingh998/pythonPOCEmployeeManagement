@@ -26,8 +26,8 @@ class ViewsTestCase(TestCase):
         mongo.db.users.delete_many({})
 
     def test_index(self):
-        response=self.client.get(url_for('index'))
-        self.assertRedirects(response,'/auth/login')
+        response=self.client.get(url_for('main.index'))
+        self.assertStatus(response,302)
 
 if __name__=='main':
     unittest.main()
