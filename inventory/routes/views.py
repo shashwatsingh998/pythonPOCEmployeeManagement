@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, session
+from flask import Blueprint, render_template, request, redirect, url_for, session,g
 from bson.objectid import ObjectId
 from inventory.db import mongo
 
@@ -8,6 +8,7 @@ main = Blueprint('main', __name__)
 def index():
     if 'user_id' not in session:
         return redirect(url_for('auth.login'))
+    print(g.user,"1")
     employees = mongo.db.employees.find()
     return render_template('index.html', employees=employees)
 
