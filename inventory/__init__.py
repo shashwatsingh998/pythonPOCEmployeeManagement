@@ -2,9 +2,9 @@ from flask import Flask
 from flask_restx import Resource,Api
 from inventory.config import Config
 from inventory.db import init_db,mongo
-from inventory.views import main
-from inventory.api_routes import api
-from inventory.auth import auth
+from inventory.routes.views import main
+from inventory.routes.api_routes import api
+from inventory.auth.auth import auth
 
 def create_app():
     app = Flask(__name__)
