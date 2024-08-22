@@ -1,9 +1,18 @@
-from flask import Blueprint, render_template, request, redirect, url_for, session, flash
+from flask import Blueprint, render_template, request, redirect, url_for, session, flash,g
 from functools import wraps
 from inventory.db import mongo
 from werkzeug.security import generate_password_hash, check_password_hash
 #no sufix currently
 auth = Blueprint('auth', __name__)
+
+@auth.before_app_request
+def beforeLogin():
+    userid=session.get('user_id');
+
+    if userid is None:
+        g.user=None
+    else:
+        g.user=mongo.db.users.find_one({'_id':userid})
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():

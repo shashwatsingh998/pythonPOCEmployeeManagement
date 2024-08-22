@@ -5,3 +5,12 @@ string linearity,naming conventions etc.
 * we need to add a logger function which can automatically detect whether user is loggen in or not
 * Give manager id attribute to the employee schema
 * Build an heirarchial model for the display of organization(this will be done using $graphLookup)
+
+Usage
+```
+Run Unit Tests using:
+python -m unittest tests/auth_test.py
+Run the project using:
+python run.py
+
+```
