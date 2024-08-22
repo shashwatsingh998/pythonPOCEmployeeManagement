@@ -1,11 +1,13 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
+from functools import wraps
 from inventory.db import mongo
 from werkzeug.security import generate_password_hash, check_password_hash
-
+#no sufix currently
 auth = Blueprint('auth', __name__)
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
+    error=None
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -16,13 +18,13 @@ def login():
             flash('Login successful!', 'success')
             return redirect(url_for('main.index'))
         else:
-            flash('Invalid username or password', 'danger')
+            error="Invalid username or password please try again later"
 
-    return render_template('login.html')
+    return render_template('login.html',error=error)
 
 @auth.route('/logout')
 def logout():
-    session.pop('user_id', None)
+    session.clear()
     flash('You have been logged out.', 'info')
     return redirect(url_for('auth.login'))
 
@@ -39,3 +41,12 @@ def register():
 
     return render_template('register.html')
 
+def login_required(view):
+    @wraps(view)
+    def wrapped_view(**kwargs):
+        if g.user is None:
+            return redirect(url_for('auth.login'))
+
+        return view(**kwargs)
+
+    return wrapped_view

@@ -3,6 +3,12 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
+{% if error %}
+<dialog open>
+  <p>{{error}}</p>
+</dialog>
+{% endif %}
+<img class='header-img' src={{url_for('static',filename='img/conversation_business_03.jpg')}} alt="company.png">
 <h1>Login</h1>
 <form method="POST">
     <label for="username">Username:</label>

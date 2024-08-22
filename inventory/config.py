@@ -1,2 +1,9 @@
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 class Config:
-    MONGO_URI = "mongodb+srv://admin:admin@cluster0.twvvaoe.mongodb.net/Users?retryWrites=true&w=majority"
+    MONGO_URI =os.getenv("MONGO_URI")
+
+    SECRET_KEY=os.getenv("secret_key")
+

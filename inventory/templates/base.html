@@ -8,9 +8,15 @@
 </head>
 <body>
     <nav>
-        <ul>
+        <ul style="display:flex; justify-content:space-between">
+            <div class='left navbar' style="display:flex; gap:10px;">
+              <div style="display:flex; margin-right:4vw;"><span style="color:orange;">Pal</span><span style="color:blue">Tech</span></div>
             <li><a href="{{ url_for('main.index') }}">Home</a></li>
             <li><a href="{{ url_for('main.add_employee') }}">Add Employee</a></li>
+            </div>
+            <div class='right navbar' style="display:flex;">
+            <li><a href="{{url_for('auth.logout')}}">Log Out </a></li>
+            </div>
         </ul>
     </nav>
     <div class="container">
