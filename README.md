@@ -4,7 +4,7 @@ Encryption for password using generate_password for the documentation. This proj
 The PEP8 concepts are also utilized such as 4 space indentation, string linearity,naming conventions etc.
 #TODO,
 * ~~we need to add a logger function which can automatically detect whether user is logged in or not~~   
-* add flask-restx function to expose and openAPI endpoint
+* ~~add flask-restx function to expose and openAPI endpoint~~
 * Give manager id attribute to the employee schema
 * Build an heirarchial model for the display of organization(this will be done using $graphLookup)
 
